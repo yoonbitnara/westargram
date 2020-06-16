@@ -1,4 +1,6 @@
 from django.db import models
+from signup.models import Signup
+from django.db import IntegrityError
 
 class Comment(models.Model):
     #유저 아이디
@@ -13,6 +15,9 @@ class Comment(models.Model):
     #댓글 수정 시간
     comment_update = models.DateTimeField(auto_now=True)
     objects = models.Manager()
+
+    account = models.ForeignKey(Signup, on_delete=models.CASCADE)
+
 
     class Meta:
         db_table = 'comment'

@@ -4,6 +4,7 @@ from django.http  import JsonResponse,HttpResponse
 from .models      import Comment
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
+from signup.models import Signup
 
 
 
@@ -28,7 +29,8 @@ class CommentView(View) :
         data = json.loads(request.body)
         Comment(
             user_id  = data['user_id'],
-            comment_data = data['comment_data']
+            comment_data = data['comment_data'],
+            account = Signup.objects.get(id=1)
         ).save()
         return JsonResponse({'message':'SUCCESS'}, status=200)
 #예외처리
