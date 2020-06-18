@@ -5,6 +5,7 @@ from .models      import Comment
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from signup.models import Signup
+from login.utills import Login_check
 
 
 
@@ -25,6 +26,7 @@ class CommentView(View):
 '''
 @method_decorator(csrf_exempt, name='dispatch')
 class CommentView(View) :
+    @Login_check
     def post(self, request):
         data = json.loads(request.body)
         Comment(
